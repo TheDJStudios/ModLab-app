@@ -6,12 +6,6 @@ import json
 from datetime import datetime
 import subprocess
 
-import requests
-from modlab_api.minecraft import install_java, install_minecraft, get_launch_command
-
-# config
-manifest_url = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"
-
 
 # directories
 
@@ -21,29 +15,10 @@ minecraft_directory = launcher_directory / "minecraft"
 packmapping_directory = launcher_directory / "packmapping"
 cache_directory = launcher_directory / "cache"
 packmapping_file = packmapping_directory / "packmapping.json"
-mcversion_manifest = cache_directory / "mcversion_manifest.json"
 
 packdata = {}
 
 # code starts here
-def cache_minecraft_manifest(force_refresh=False):
-    cache_directory.mkdir(parents=True, exist_ok=True)
-
-    if mcversion_manifest.exists() and not force_refresh:
-        try:
-            return json.loads(mcversion_manifest.read_text(encoding="utf-8"))
-        except json.JSONDecodeError:
-            print("Minecraft manifest cache is invalid, downloading a fresh copy")
-
-    manifest_response = requests.get(manifest_url, timeout=30)
-    manifest_response.raise_for_status()
-    manifest = manifest_response.json()
-    mcversion_manifest.write_text(
-        json.dumps(manifest, indent=4),
-        encoding="utf-8"
-    )
-    return manifest
-
 def initialize_launcher():
     global packdata
     if not launcher_directory.exists():
@@ -61,9 +36,6 @@ def initialize_launcher():
     if not cache_directory.exists():
         print("Cache directory does not exist, Making directory")
         cache_directory.mkdir()
-    if not mcversion_manifest.exists():
-        print("Minecraft manifest file does not exist, downloading")
-    cache_minecraft_manifest()
 
     if not packmapping_file.exists():
         print("Cannot find packmapping.json, Making file base")
@@ -72,6 +44,7 @@ def initialize_launcher():
         packdata = json.loads(packmapping_file.read_text(encoding="utf-8"))
     else:
         packdata = json.loads(packmapping_file.read_text(encoding="utf-8"))
+
 
 def clear_cache():
     cache_directory.rmdir()
