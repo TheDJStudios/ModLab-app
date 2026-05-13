@@ -6,6 +6,7 @@ import json
 from datetime import datetime
 import subprocess
 import shutil
+import tkinter as tk
 import minecraft_launcher_lib
 
 
@@ -274,6 +275,67 @@ def main():
             exit()
 
 
+def gui_main():
+    root = tk.Tk()
+    root.title("ModLab")
+
+
+    tk.Label(root, text="Pack Name").grid(row=0, column=0, padx=8, pady=6, sticky="w")
+    tk.Label(root, text="Actions").grid(row=0, column=1, columnspan=3, padx=8, pady=6, sticky="w")
+
+    def popup_create():
+        popup = tk.Toplevel(root)
+        popup.title("Create Minecraft pack")
+        popup.geometry("300x270")
+        popup.grab_set()
+
+        label = tk.Label(popup, text="Create Minecraft pack")
+        label.pack(pady=10)
+
+        tk.Label(popup, text="Enter Name:").pack(pady=2)
+        name_entry = tk.Entry(popup)
+        name_entry.pack(pady=2)
+
+        tk.Label(popup, text="Select version").pack(pady=2)
+        version_entry = tk.Entry(popup)
+        version_entry.pack(pady=2)
+
+        tk.Label(popup, text="Select Loader:").pack(pady=2)
+        loader_var = tk.StringVar(popup)
+        loader_var.set("vanilla")
+        dropdown_1 = tk.OptionMenu(popup, loader_var, "vanilla", "fabric", "forge")
+        dropdown_1.pack(pady=2)
+
+
+        def on_submit():
+            name = name_entry.get()
+            version = version_entry.get()
+            loader = loader_var.get()
+
+            make_pack(name, version, loader)
+
+            popup.destroy()
+            refresh()
+        submit_button = tk.Button(popup, text="Submit", command=on_submit)
+        submit_button.pack(pady=10)
+
+    create_button = tk.Button(root, text="Create Minecraft pack", command=popup_create)
+    create_button.grid(row=1, column=0, columnspan=4, padx=8, pady=8, sticky="w")
+
+    def refresh():
+        root.destroy()
+        gui_main()
+
+    for row, pack_key in enumerate(packdata, start=2):
+        pack_name = packdata[pack_key].get("name", pack_key)
+        tk.Label(root, text=pack_name).grid(row=row, column=0, padx=8, pady=4, sticky="w")
+        tk.Button(root, text="Run", command=lambda name=pack_key: run_minecraft(name)).grid(row=row, column=1, padx=4, pady=4)
+        tk.Button(root, text="Install", command=lambda name=pack_key: install_minecraft(name)).grid(row=row, column=2, padx=4, pady=4)
+        tk.Button(root, text="Delete", command=lambda name=pack_key: (delete_pack(name), refresh())).grid(row=row, column=3, padx=4, pady=4)
+
+    root.mainloop()
+
+
 if __name__ == "__main__":
     initialize_launcher()
-    main()
+    gui_main()
