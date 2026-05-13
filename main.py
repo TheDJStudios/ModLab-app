@@ -5,11 +5,14 @@ import random
 import json
 from datetime import datetime
 import subprocess
+import shutil
+import minecraft_launcher_lib
 
 
 # directories
 
-launcher_directory = Path(".modlab")
+#launcher_directory = Path(".modlab")
+launcher_directory = Path().home() / ".modlab"
 packs_directory = launcher_directory / "packs"
 minecraft_directory = launcher_directory / "minecraft"
 packmapping_directory = launcher_directory / "packmapping"
@@ -17,6 +20,9 @@ cache_directory = launcher_directory / "cache"
 packmapping_file = packmapping_directory / "packmapping.json"
 
 packdata = {}
+
+
+current_max = 0
 
 # code starts here
 def initialize_launcher():
@@ -46,13 +52,151 @@ def initialize_launcher():
         packdata = json.loads(packmapping_file.read_text(encoding="utf-8"))
 
 
+def save_packdata():
+    packmapping_file.write_text(
+        json.dumps(packdata, indent=4),
+        encoding="utf-8"
+    )
+
+
+def get_pack(packname):
+    pack_key = packname.lower()
+    if pack_key not in packdata:
+        raise KeyError(f"No pack named {packname}")
+    return pack_key, packdata[pack_key]
+
+def set_status(status: str):
+    print(status)
+
+
+def set_progress(progress: int):
+    if current_max != 0:
+        print(f"{progress}/{current_max}")
+
+
+def set_max(new_max: int):
+    global current_max
+    current_max = new_max
+
+
+callback = {
+    "setStatus": set_status,
+    "setProgress": set_progress,
+    "setMax": set_max
+}
+
+
+def install_java_runtime(version, mcdirectory, java_directory):
+    runtime_info = minecraft_launcher_lib.runtime.get_version_runtime_information(version, mcdirectory)
+    if runtime_info is None:
+        return None
+
+    runtime_name = runtime_info["name"]
+    java_directory.mkdir(parents=True, exist_ok=True)
+    minecraft_launcher_lib.runtime.install_jvm_runtime(
+        runtime_name,
+        java_directory,
+        callback=callback,
+    )
+    return minecraft_launcher_lib.runtime.get_executable_path(runtime_name, java_directory)
+
+
+def install_pack(packname):
+    print("Installing Minecraft")
+    pack_key, pack = get_pack(packname)
+    version = pack["version"]
+    loader = pack.get("loader", "vanilla").lower()
+    mcdirectory = (packs_directory / pack["dir"]).resolve()
+    java_directory = mcdirectory / "java"
+    mcdirectory.mkdir(parents=True, exist_ok=True)
+
+    if loader == "vanilla":
+        minecraft_launcher_lib.install.install_minecraft_version(
+            version=version,
+            minecraft_directory=mcdirectory,
+            callback=callback,
+        )
+        launch_version = version
+        java_executable = install_java_runtime(launch_version, mcdirectory, java_directory)
+    else:
+        minecraft_launcher_lib.install.install_minecraft_version(
+            version=version,
+            minecraft_directory=mcdirectory,
+            callback=callback,
+        )
+        java_executable = install_java_runtime(version, mcdirectory, java_directory)
+        mod_loader = minecraft_launcher_lib.mod_loader.get_mod_loader(loader)
+        launch_version = mod_loader.install(
+            version,
+            mcdirectory,
+            callback=callback,
+            java=java_executable,
+        )
+        java_executable = install_java_runtime(launch_version, mcdirectory, java_directory) or java_executable
+
+    root_runtime_directory = mcdirectory / "runtime"
+    if root_runtime_directory.exists():
+        shutil.rmtree(root_runtime_directory)
+    pack["launch_version"] = launch_version
+    pack["java_dir"] = str(java_directory)
+    if java_executable is not None:
+        pack["java_executable"] = java_executable
+    save_packdata()
+    print(f"Minecraft {launch_version} installed")
+
+
+def install_minecraft(packname):
+    install_pack(packname)
+
+
+def run_minecraft(packname):
+    print("Running Minecraft")
+    packname, pack = get_pack(packname)
+    mcdirectory = (packs_directory / pack["dir"]).resolve()
+    java_directory = Path(pack.get("java_dir", mcdirectory / "java")).resolve()
+    mcdirectory.mkdir(parents=True, exist_ok=True)
+
+    options = minecraft_launcher_lib.utils.generate_test_options()
+    options["gameDirectory"] = str(mcdirectory)
+    options["launcherName"] = "ModLab"
+    if pack.get("java_executable") and Path(pack["java_executable"]).exists():
+        options["executablePath"] = pack["java_executable"]
+    else:
+        java_executable = install_java_runtime(pack.get("launch_version", pack["version"]), mcdirectory, java_directory)
+        if java_executable is not None:
+            pack["java_dir"] = str(java_directory)
+            pack["java_executable"] = java_executable
+            save_packdata()
+            options["executablePath"] = java_executable
+
+    command = minecraft_launcher_lib.command.get_minecraft_command(
+        pack.get("launch_version", pack["version"]),
+        mcdirectory,
+        options,
+    )
+
+    subprocess.run(command, cwd=mcdirectory)
+
 def clear_cache():
     cache_directory.rmdir()
     cache_directory.mkdir()
     print("Cache directory cleared")
 
 
-def make_pack(packname, minecraft_version):
+def make_pack(packname, minecraft_version, loader="vanilla"):
+    pack_key = packname.lower()
+    loader = loader.lower()
+
+    if pack_key in packdata:
+        print(f"A pack named {packname} already exists")
+        return
+
+    valid_loaders = ["vanilla", *minecraft_launcher_lib.mod_loader.list_mod_loader()]
+    if loader not in valid_loaders:
+        print(f"Unknown loader: {loader}")
+        print(f"Valid loaders: {', '.join(valid_loaders)}")
+        return
+
     pack_folder = f"{packname}_{minecraft_version}"
     pack_path = packs_directory / pack_folder
 
@@ -63,56 +207,69 @@ def make_pack(packname, minecraft_version):
     else:
         pack_path.mkdir()
 
-    packdata[f"{packname.lower()}"] = {
+    packdata[pack_key] = {
         "dir": pack_folder,
         "version": minecraft_version,
+        "launch_version": minecraft_version,
         "name": packname,
+        "loader": loader,
     }
-    packmapping_file.write_text(
-        json.dumps(packdata, indent=4),
-        encoding="utf-8"
-    )
+    save_packdata()
+    install_pack(pack_key)
 
 def list_packs():
     for pack in packdata:
         print(f"- {pack}")
 def delete_pack(packname):
-    if packname.lower() in packdata:
-        deldir = packdata[packname]["dir"]
-        if Path(deldir).exists():
-            print(deldir)
-            rmvedir = packs_directory / deldir
-            print(rmvedir)
-            rmvedir.rmdir()
-        else:
-            print(f"No directory was found for {packname}'s listed directory")
-        del packdata[packname]
-        packmapping_file.write_text(
-            json.dumps(packdata, indent=4),
-            encoding="utf-8"
-        )
-        print(f"{packname} removed")
+    pack_key = packname.lower()
+    if pack_key not in packdata:
+        print(f"No pack named {packname}")
+        return
+
+    deldir = packdata[pack_key]["dir"]
+    remove_dir = packs_directory / deldir
+    if remove_dir.exists():
+        print(remove_dir)
+        shutil.rmtree(remove_dir)
+    else:
+        print(f"No directory was found for {packname}'s listed directory: {remove_dir}")
+
+    del packdata[pack_key]
+    save_packdata()
+    print(f"{packname} removed")
+
 
 def main():
     while True:
-        print(f"Welcome to ModLab Launcher\nSupported actions:\n\nPack (Sub actions available)")
+        print(f"Welcome to ModLab Launcher\nSupported actions:\n\nPack (Sub actions available)\nExit - Fully exit ModLab Launcher")
         func = input("Home >> ")
         if func.lower() == "pack":
-            print(f"make\ndelete\nlist")
+            print(f"make\ndelete\ninstall\nrun\nlist")
             func = input("Pack >> ")
             if func.lower() == "make":
                 print("To make your pack, We need a name.\ntype anything alphanumeric here (abcdefghijklmnopqrstuvwxyz 1234567890)")
                 pkname = input("Pack Name >> ")
                 print("Awesome! Now we need a Minecraft version. Minecraft versions available in minecraft > versions In the main menu!")
                 pkversion = input("Pack Version >> ")
+                print("Almost there, We need to know if this pack is going to be modded. please type 'True' or 'False'")
+                pkloader = "vanilla"
+                if input("Pack modded? >> ").strip().lower() in {"true", "yes", "y"}:
+                    print("Finally, we need to know what loader its going to be. Please type 'Fabric' or 'Forge'")
+                    pkloader = input("Pack Loader >> ")
                 print(f"Awesome! We are currently making pack {pkname} for Minecraft {pkversion}.")
-                make_pack(pkname, pkversion)
+                make_pack(pkname, pkversion, pkloader)
 
             elif func.lower() == "list":
                 list_packs()
             elif func.lower() == "delete":
                 pkname = input("Pack name >> ")
                 delete_pack(pkname)
+            elif func.lower() == "install":
+                pkname = input("install to pack >> ")
+                install_minecraft(pkname)
+            elif func.lower() == "run":
+                pkname = input("Run pack with name >> ")
+                run_minecraft(pkname)
         elif func.lower() == "exit":
             exit()
 
