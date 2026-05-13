@@ -1,2 +1,5 @@
 /.modlab/packs
 .DS_Store
+/build
+/dist
+main.spec
