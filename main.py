@@ -10,6 +10,7 @@ import subprocess
 import shutil
 import tkinter as tk
 import minecraft_launcher_lib
+import argparse
 
 
 # directories
@@ -26,6 +27,42 @@ packdata = {}
 
 
 current_max = 0
+
+def cli_main():
+    global CURRENT_PACK_KEY
+    parser = argparse.ArgumentParser(description="ModLab backend")
+    parser.add_argument("--action",  required=True,
+                        choices=["run","install","delete","make"])
+    parser.add_argument("--pack",    default="")
+    parser.add_argument("--name",    default="")
+    parser.add_argument("--version", default="")
+    parser.add_argument("--loader",  default="vanilla")
+    args = parser.parse_args()
+
+    initialize_launcher()
+
+    try:
+        if args.action == "run":
+            CURRENT_PACK_KEY = args.pack
+            run_minecraft(args.pack)
+
+        elif args.action == "install":
+            CURRENT_PACK_KEY = args.pack
+            install_minecraft(args.pack)
+
+        elif args.action == "delete":
+            CURRENT_PACK_KEY = args.pack
+            delete_pack(args.pack)
+
+        elif args.action == "make":
+            CURRENT_PACK_KEY = args.name.lower()
+            make_pack(args.name, args.version, args.loader)
+
+        print(f"DONE:{CURRENT_PACK_KEY}", flush=True)
+
+    except Exception as e:
+        print(f"ERROR:{CURRENT_PACK_KEY}:{e}", flush=True)
+        raise SystemExit(1)
 
 # code starts here
 def initialize_launcher():
@@ -68,14 +105,15 @@ def get_pack(packname):
         raise KeyError(f"No pack named {packname}")
     return pack_key, packdata[pack_key]
 
-def set_status(status: str):
-    print(status)
+CURRENT_PACK_KEY = ""
 
+def set_status(status: str):
+    print(f"STATUS:{CURRENT_PACK_KEY}:{status}", flush=True)
 
 def set_progress(progress: int):
     if current_max != 0:
-        print(f"{progress}/{current_max}")
-
+        percent = int((progress / current_max) * 100)
+        print(f"PROGRESS:{CURRENT_PACK_KEY}:{percent}", flush=True)
 
 def set_max(new_max: int):
     global current_max
@@ -339,5 +377,11 @@ def gui_main():
 
 
 if __name__ == "__main__":
-    initialize_launcher()
-    gui_main()
+    import sys
+    # If any --action flag is present, run headless CLI mode for Qt IPC
+    if "--action" in sys.argv:
+        cli_main()
+    else:
+        # Original GUI entrypoint (kept for direct testing)
+        initialize_launcher()
+        gui_main()
