@@ -61,7 +61,7 @@ If not present, Qt falls back to system fonts.
 ## Run
 
 ```bash
-python3 -m modlab
+python3 -m modlab-pyshit-client
 ```
 
 With explicit backend/runtime paths:
@@ -69,14 +69,14 @@ With explicit backend/runtime paths:
 ```bash
 MODLAB_PYTHON=/path/to/venv/bin/python3 \
 MODLAB_SCRIPT=/path/to/main.py \
-python3 -m modlab
+python3 -m modlab-pyshit-client
 ```
 
 The helper scripts simply run the Python frontend:
 
 ```bash
-modlab/scripts/build.sh
-modlab\scripts\build.bat
+modlab-pyshit-client/scripts/build.sh
+modlab-pyshit-client\scripts\build.bat
 ```
 
 ---

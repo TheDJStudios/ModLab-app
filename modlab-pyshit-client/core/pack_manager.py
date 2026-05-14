@@ -15,7 +15,7 @@ class PackManager(QObject):
     def __init__(self, parent=None):
         super().__init__(parent)
         self._packs: list[Pack] = []
-        self.launcher_directory = Path.home() / ".modlab"
+        self.launcher_directory = Path.home() / ".modlab-pyshit-client"
         self.packs_directory = self.launcher_directory / "packs"
         self.mapping_path = self.launcher_directory / "packmapping" / "packmapping.json"
 

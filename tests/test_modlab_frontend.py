@@ -130,7 +130,7 @@ class ModLabFrontendTests(unittest.TestCase):
     def test_backend_duplicate_make_fails_before_install(self):
         with tempfile.TemporaryDirectory() as tmp:
             home = Path(tmp)
-            mapping_dir = home / ".modlab" / "packmapping"
+            mapping_dir = home / ".modlab-pyshit-client" / "packmapping"
             mapping_dir.mkdir(parents=True)
             (mapping_dir / "packmapping.json").write_text(
                 json.dumps(
@@ -173,7 +173,7 @@ class ModLabFrontendTests(unittest.TestCase):
         import main
 
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp) / ".modlab"
+            root = Path(tmp) / ".modlab-pyshit-client"
             old_paths = (
                 main.launcher_directory,
                 main.packs_directory,

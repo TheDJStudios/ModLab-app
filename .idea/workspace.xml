@@ -3,16 +3,82 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="ALL" />
   </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
+    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
+  </component>
+  <component name="CMakePresetLoader"><![CDATA[{
+  "useNewFormat": true
+}]]></component>
+  <component name="CMakeRunConfigurationManager">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d30cb06-faca-4fec-84f4-27938fc645a2" name="Changes" comment="" />
+    <list default="true" id="2d30cb06-faca-4fec-84f4-27938fc645a2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/scripts/build.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/scripts/build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/core/Pack.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/core/PackManager.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/core/PackManager.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ipc/BackendProcess.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ipc/BackendProcess.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/main.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/AeroStyle.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/DetailPanel.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/DetailPanel.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/MainWindow.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/MainWindow.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/NewPackDialog.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/NewPackDialog.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackCard.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackCard.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackGrid.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackGrid.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/Sidebar.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/Sidebar.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/TopBar.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/TopBar.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/core/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/core/pack.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/core/pack.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/core/pack_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/core/pack_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/ipc/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ipc/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/ipc/backend_process.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ipc/backend_process.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/scripts/build.bat" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/scripts/build.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/scripts/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/scripts/build.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/ui/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/ui/aero_style.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/aero_style.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/ui/detail_panel.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/detail_panel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/ui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/main_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/ui/new_pack_dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/new_pack_dialog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/ui/pack_card.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/pack_card.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/ui/pack_grid.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/pack_grid.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/ui/sidebar.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/sidebar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab/ui/top_bar.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/top_bar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_modlab_frontend.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_modlab_frontend.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
   <component name="EmbeddingIndexingInfo">
     <option name="cachedIndexableFilesCount" value="40" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -21,7 +87,16 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="eb72c34c3568294a948af046fc5b5b69661c34e5" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="wWC9qIsK" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -60,6 +135,12 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/modlab-cpp-client" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="build.sh" type="ShConfigurationType" temporary="true">
       <option name="SCRIPT_TEXT" value="" />
@@ -99,11 +180,29 @@
       <workItem from="1778616882581" duration="642000" />
       <workItem from="1778617825647" duration="1238000" />
       <workItem from="1778621854780" duration="24351000" />
+      <workItem from="1778716238914" duration="5444000" />
+      <workItem from="1778724378600" duration="676000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ModLab_app$app.coverage" NAME="app Coverage Results" MODIFIED="1778716785211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modlab" />

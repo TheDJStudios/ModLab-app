@@ -18,4 +18,4 @@ echo "==> Run with:"
 echo "    python3 -m modlab"
 echo ""
 
-python3 -m modlab
+python3 -m modlab-pyshit-client

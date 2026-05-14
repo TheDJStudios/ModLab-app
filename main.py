@@ -12,8 +12,8 @@ import argparse
 
 # directories
 
-#launcher_directory = Path(".modlab")
-launcher_directory = Path().home() / ".modlab"
+#launcher_directory = Path(".modlab-pyshit-client")
+launcher_directory = Path().home() / ".modlab-pyshit-client"
 packs_directory = launcher_directory / "packs"
 minecraft_directory = launcher_directory / "minecraft"
 packmapping_directory = launcher_directory / "packmapping"

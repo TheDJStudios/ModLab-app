@@ -81,7 +81,7 @@ class Sidebar(QWidget):
         footer.setStyleSheet("border-top: 1px solid rgba(56,217,245,0.1);")
         foot_layout = QHBoxLayout(footer)
         foot_layout.setContentsMargins(16, 0, 16, 0)
-        ver = QLabel("modlab v0.1.0-alpha", footer)
+        ver = QLabel("modlab-pyshit-client v0.1.0-alpha", footer)
         ver.setStyleSheet("font-size: 9px; color: #4a7a96;")
         foot_layout.addWidget(ver)
         root.addWidget(footer)
