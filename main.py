@@ -2,19 +2,19 @@
 
 import pathlib
 from pathlib import Path
-import os
-import random
 import json
 from datetime import datetime
 import subprocess
 import shutil
+import tkinter as tk
 import minecraft_launcher_lib
+import argparse
 
 
 # directories
 
-#launcher_directory = Path(".modlab")
-launcher_directory = Path().home() / ".modlab"
+#launcher_directory = Path(".modlab-pyshit-client")
+launcher_directory = Path().home() / ".modlab-pyshit-client"
 packs_directory = launcher_directory / "packs"
 minecraft_directory = launcher_directory / "minecraft"
 packmapping_directory = launcher_directory / "packmapping"
@@ -26,24 +26,60 @@ packdata = {}
 
 current_max = 0
 
+def cli_main():
+    global CURRENT_PACK_KEY
+    parser = argparse.ArgumentParser(description="ModLab backend")
+    parser.add_argument("--action",  required=True,
+                        choices=["run","install","delete","make"])
+    parser.add_argument("--pack",    default="")
+    parser.add_argument("--name",    default="")
+    parser.add_argument("--version", default="")
+    parser.add_argument("--loader",  default="vanilla")
+    args = parser.parse_args()
+
+    initialize_launcher()
+
+    try:
+        if args.action == "run":
+            CURRENT_PACK_KEY = args.pack
+            run_minecraft(args.pack)
+
+        elif args.action == "install":
+            CURRENT_PACK_KEY = args.pack
+            install_minecraft(args.pack)
+
+        elif args.action == "delete":
+            CURRENT_PACK_KEY = args.pack
+            delete_pack(args.pack)
+
+        elif args.action == "make":
+            CURRENT_PACK_KEY = args.name.lower()
+            make_pack(args.name, args.version, args.loader)
+
+        print(f"DONE:{CURRENT_PACK_KEY}", flush=True)
+
+    except Exception as e:
+        print(f"ERROR:{CURRENT_PACK_KEY}:{e}", flush=True)
+        raise SystemExit(1)
+
 # code starts here
 def initialize_launcher():
     global packdata
     if not launcher_directory.exists():
         print("Launcher directory does not exist, Making directory")
-        launcher_directory.mkdir()
+        launcher_directory.mkdir(parents=True, exist_ok=True)
     if not packs_directory.exists():
         print("Packs directory does not exist, Making directory")
-        packs_directory.mkdir()
+        packs_directory.mkdir(parents=True, exist_ok=True)
     if not minecraft_directory.exists():
         print("Minecraft directory does not exist, Making directory")
-        minecraft_directory.mkdir()
+        minecraft_directory.mkdir(parents=True, exist_ok=True)
     if not packmapping_directory.exists():
         print("Packmapping directory does not exist, Making directory")
-        packmapping_directory.mkdir()
+        packmapping_directory.mkdir(parents=True, exist_ok=True)
     if not cache_directory.exists():
         print("Cache directory does not exist, Making directory")
-        cache_directory.mkdir()
+        cache_directory.mkdir(parents=True, exist_ok=True)
 
     if not packmapping_file.exists():
         print("Cannot find packmapping.json, Making file base")
@@ -67,14 +103,15 @@ def get_pack(packname):
         raise KeyError(f"No pack named {packname}")
     return pack_key, packdata[pack_key]
 
-def set_status(status: str):
-    print(status)
+CURRENT_PACK_KEY = ""
 
+def set_status(status: str):
+    print(f"STATUS:{CURRENT_PACK_KEY}:{status}", flush=True)
 
 def set_progress(progress: int):
     if current_max != 0:
-        print(f"{progress}/{current_max}")
-
+        percent = int((progress / current_max) * 100)
+        print(f"PROGRESS:{CURRENT_PACK_KEY}:{percent}", flush=True)
 
 def set_max(new_max: int):
     global current_max
@@ -110,7 +147,9 @@ def install_pack(packname):
     loader = pack.get("loader", "vanilla").lower()
     mcdirectory = (packs_directory / pack["dir"]).resolve()
     java_directory = mcdirectory / "java"
+    mods_directory = mcdirectory / "mods"
     mcdirectory.mkdir(parents=True, exist_ok=True)
+    mods_directory.mkdir(parents=True, exist_ok=True)
 
     if loader == "vanilla":
         minecraft_launcher_lib.install.install_minecraft_version(
@@ -180,8 +219,9 @@ def run_minecraft(packname):
     subprocess.run(command, cwd=mcdirectory)
 
 def clear_cache():
-    cache_directory.rmdir()
-    cache_directory.mkdir()
+    if cache_directory.exists():
+        shutil.rmtree(cache_directory)
+    cache_directory.mkdir(parents=True, exist_ok=True)
     print("Cache directory cleared")
 
 
@@ -190,14 +230,11 @@ def make_pack(packname, minecraft_version, loader="vanilla"):
     loader = loader.lower()
 
     if pack_key in packdata:
-        print(f"A pack named {packname} already exists")
-        return
+        raise ValueError(f"A pack named {packname} already exists")
 
     valid_loaders = ["vanilla", *minecraft_launcher_lib.mod_loader.list_mod_loader()]
     if loader not in valid_loaders:
-        print(f"Unknown loader: {loader}")
-        print(f"Valid loaders: {', '.join(valid_loaders)}")
-        return
+        raise ValueError(f"Unknown loader: {loader}. Valid loaders: {', '.join(valid_loaders)}")
 
     pack_folder = f"{packname}_{minecraft_version}"
     pack_path = packs_directory / pack_folder
@@ -208,6 +245,7 @@ def make_pack(packname, minecraft_version, loader="vanilla"):
         pack_path.mkdir()
     else:
         pack_path.mkdir()
+    (pack_path / "mods").mkdir(exist_ok=True)
 
     packdata[pack_key] = {
         "dir": pack_folder,
@@ -276,6 +314,73 @@ def main():
             exit()
 
 
+def gui_main():
+    root = tk.Tk()
+    root.title("ModLab")
+
+
+    tk.Label(root, text="Pack Name").grid(row=0, column=0, padx=8, pady=6, sticky="w")
+    tk.Label(root, text="Actions").grid(row=0, column=1, columnspan=3, padx=8, pady=6, sticky="w")
+
+    def popup_create():
+        popup = tk.Toplevel(root)
+        popup.title("Create Minecraft pack")
+        popup.geometry("300x270")
+        popup.grab_set()
+
+        label = tk.Label(popup, text="Create Minecraft pack")
+        label.pack(pady=10)
+
+        tk.Label(popup, text="Enter Name:").pack(pady=2)
+        name_entry = tk.Entry(popup)
+        name_entry.pack(pady=2)
+
+        tk.Label(popup, text="Select version").pack(pady=2)
+        version_entry = tk.Entry(popup)
+        version_entry.pack(pady=2)
+
+        tk.Label(popup, text="Select Loader:").pack(pady=2)
+        loader_var = tk.StringVar(popup)
+        loader_var.set("vanilla")
+        dropdown_1 = tk.OptionMenu(popup, loader_var, "vanilla", "fabric", "forge")
+        dropdown_1.pack(pady=2)
+
+
+        def on_submit():
+            name = name_entry.get()
+            version = version_entry.get()
+            loader = loader_var.get()
+
+            make_pack(name, version, loader)
+
+            popup.destroy()
+            refresh()
+        submit_button = tk.Button(popup, text="Submit", command=on_submit)
+        submit_button.pack(pady=10)
+
+    create_button = tk.Button(root, text="Create Minecraft pack", command=popup_create)
+    create_button.grid(row=1, column=0, columnspan=4, padx=8, pady=8, sticky="w")
+
+    def refresh():
+        root.destroy()
+        gui_main()
+
+    for row, pack_key in enumerate(packdata, start=2):
+        pack_name = packdata[pack_key].get("name", pack_key)
+        tk.Label(root, text=pack_name).grid(row=row, column=0, padx=8, pady=4, sticky="w")
+        tk.Button(root, text="Run", command=lambda name=pack_key: run_minecraft(name)).grid(row=row, column=1, padx=4, pady=4)
+        tk.Button(root, text="Install", command=lambda name=pack_key: install_minecraft(name)).grid(row=row, column=2, padx=4, pady=4)
+        tk.Button(root, text="Delete", command=lambda name=pack_key: (delete_pack(name), refresh())).grid(row=row, column=3, padx=4, pady=4)
+
+    root.mainloop()
+
+
 if __name__ == "__main__":
-    initialize_launcher()
-    main()
+    import sys
+    # If any --action flag is present, run headless CLI mode for Qt IPC
+    if "--action" in sys.argv:
+        cli_main()
+    else:
+        # Original GUI entrypoint (kept for direct testing)
+        initialize_launcher()
+        gui_main()

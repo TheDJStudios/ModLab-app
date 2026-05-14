@@ -1,5 +1,7 @@
 /.modlab/packs
 .DS_Store
+__pycache__/
+*.py[cod]
 /build
 /dist
 main.spec
