@@ -24,7 +24,7 @@ def main() -> int:
     app.setStyleSheet(AeroStyle.sheet())
 
     window = MainWindow(
-        python_path=os.environ.get("MODLAB_PYTHON", "python3"),
+        python_path=os.environ.get("MODLAB_PYTHON", sys.executable),
         script_path=os.environ.get(
             "MODLAB_SCRIPT",
             os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "main.py")),

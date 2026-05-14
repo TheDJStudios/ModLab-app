@@ -1,9 +1,17 @@
 from dataclasses import dataclass
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import QDialog, QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
 
 from ..core.pack import Loader
+
+
+class LoaderTile(QFrame):
+    clicked = Signal()
+
+    def mousePressEvent(self, event) -> None:
+        super().mousePressEvent(event)
+        self.clicked.emit()
 
 
 @dataclass
@@ -24,7 +32,7 @@ class NewPackDialog(QDialog):
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.loader = Loader.FABRIC
         self.result_data = NewPackData()
-        self.loader_tiles: dict[Loader, QFrame] = {}
+        self.loader_tiles: dict[Loader, LoaderTile] = {}
         self._build_layout()
 
     def _build_layout(self) -> None:
@@ -144,8 +152,8 @@ class NewPackDialog(QDialog):
         body_layout.addWidget(block)
         return edit
 
-    def _make_loader_tile(self, parent: QWidget, abbr: str, label: str, loader: Loader) -> QFrame:
-        tile = QFrame(parent)
+    def _make_loader_tile(self, parent: QWidget, abbr: str, label: str, loader: Loader) -> LoaderTile:
+        tile = LoaderTile(parent)
         tile.setFixedHeight(56)
         tile.setCursor(Qt.PointingHandCursor)
         layout = QVBoxLayout(tile)
@@ -159,7 +167,9 @@ class NewPackDialog(QDialog):
         name_label.setStyleSheet("font-size:8px; color:#4a7a96; text-transform:uppercase;")
         layout.addWidget(abbr_label)
         layout.addWidget(name_label)
-        tile.mousePressEvent = lambda _event, l=loader: self.select_loader(l)
+        for child in (abbr_label, name_label):
+            child.setAttribute(Qt.WA_TransparentForMouseEvents)
+        tile.clicked.connect(lambda l=loader: self.select_loader(l))
         return tile
 
     def select_loader(self, loader: Loader) -> None:

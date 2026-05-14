@@ -1,5 +1,9 @@
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QApplication, QHBoxLayout, QLabel, QMainWindow, QMessageBox, QStackedWidget, QVBoxLayout, QWidget
+import shutil
+from pathlib import Path
+
+from PySide6.QtCore import Qt, QUrl
+from PySide6.QtGui import QDesktopServices
+from PySide6.QtWidgets import QApplication, QFileDialog, QHBoxLayout, QLabel, QMainWindow, QMessageBox, QStackedWidget, QVBoxLayout, QWidget
 
 from ..core.pack import Pack, PackStatus, loader_name
 from ..core.pack_manager import PackManager
@@ -72,16 +76,16 @@ class MainWindow(QMainWindow):
     def _connect_signals(self) -> None:
         self.sidebar.page_requested.connect(self.on_page_requested)
         self.top_bar.new_pack_requested.connect(self.on_new_pack_requested)
+        self.top_bar.search_changed.connect(self.pack_grid.set_filter)
         self.pack_grid.new_pack_requested.connect(self.on_new_pack_requested)
         self.pack_grid.run_requested.connect(self.on_run_requested)
         self.pack_grid.install_requested.connect(self.on_install_requested)
         self.pack_grid.delete_requested.connect(self.on_delete_requested)
         self.pack_grid.pack_selected.connect(self.on_pack_selected)
         self.detail_panel.launch_requested.connect(self.on_run_requested)
-        self.detail_panel.add_mods_requested.connect(lambda _key: None)
-        self.detail_panel.pack_settings_requested.connect(lambda _key: None)
+        self.detail_panel.add_mods_requested.connect(self.on_add_mods_requested)
+        self.detail_panel.pack_settings_requested.connect(self.on_pack_settings_requested)
         self.pack_manager.packs_changed.connect(self.on_packs_changed)
-        self.pack_manager.pack_progress_changed.connect(self.on_progress_update)
         self.backend.progress_update.connect(self.on_progress_update)
         self.backend.operation_done.connect(self.on_operation_done)
         self.backend.operation_error.connect(self.on_operation_error)
@@ -113,6 +117,15 @@ class MainWindow(QMainWindow):
         data = dialog.result_data
         if not data.name or not data.version:
             return
+        self.pack_manager.add_placeholder(
+            Pack(
+                key=data.name.lower(),
+                name=data.name,
+                mc_version=data.version,
+                loader=data.loader,
+                status=PackStatus.INSTALLING,
+            )
+        )
         self.backend.make_pack(data.name, data.version, loader_name(data.loader).lower())
 
     def on_run_requested(self, key: str) -> None:
@@ -143,6 +156,48 @@ class MainWindow(QMainWindow):
         if pack is not None:
             self.detail_panel.show_pack(pack)
 
+    def on_add_mods_requested(self, key: str) -> None:
+        pack = self.pack_manager.find_pack(key)
+        if pack is None:
+            return
+        if pack.mods_directory is None:
+            QMessageBox.warning(self, "ModLab Error", "This pack does not have a mod directory yet.")
+            return
+
+        files, _selected_filter = QFileDialog.getOpenFileNames(
+            self,
+            "Add Mods",
+            "",
+            "Minecraft mods (*.jar);;All files (*)",
+        )
+        if not files:
+            return
+
+        pack.mods_directory.mkdir(parents=True, exist_ok=True)
+        copied = 0
+        for source in files:
+            source_path = Path(source)
+            if not source_path.exists():
+                continue
+            destination = pack.mods_directory / source_path.name
+            shutil.copy2(source_path, destination)
+            copied += 1
+
+        self.pack_manager.reload_from_disk()
+        refreshed = self.pack_manager.find_pack(key)
+        if refreshed is not None:
+            self.pack_grid.set_selected_key(key)
+            self.detail_panel.show_pack(refreshed)
+        if copied:
+            self.pack_manager.save()
+
+    def on_pack_settings_requested(self, key: str) -> None:
+        pack = self.pack_manager.find_pack(key)
+        if pack is None or pack.directory is None:
+            return
+        pack.directory.mkdir(parents=True, exist_ok=True)
+        QDesktopServices.openUrl(QUrl.fromLocalFile(str(pack.directory)))
+
     def on_packs_changed(self) -> None:
         self.pack_grid.set_packs(self.pack_manager.packs)
 
@@ -164,6 +219,9 @@ class MainWindow(QMainWindow):
             pack.status = PackStatus.READY
             self.pack_grid.update_pack(pack)
             self.detail_panel.show_pack(pack)
+        else:
+            self.pack_grid.set_selected_key("")
+            self.detail_panel.clear_pack()
 
     def on_operation_error(self, key: str, message: str) -> None:
         QMessageBox.warning(

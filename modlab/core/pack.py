@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
+from pathlib import Path
 
 
 class Loader(Enum):
@@ -50,11 +51,28 @@ def status_label(status: PackStatus) -> str:
 
 
 @dataclass
+class ModFile:
+    name: str
+    path: Path
+    size_bytes: int = 0
+
+    @property
+    def size_label(self) -> str:
+        if self.size_bytes >= 1024 * 1024:
+            return f"{self.size_bytes / (1024 * 1024):.1f} MB"
+        if self.size_bytes >= 1024:
+            return f"{self.size_bytes / 1024:.1f} KB"
+        return f"{self.size_bytes} B"
+
+
+@dataclass
 class Pack:
     key: str
     name: str
     mc_version: str
     loader: Loader
+    directory: Path | None = None
+    mods: list[ModFile] | None = None
     mod_count: int = 0
     status: PackStatus = PackStatus.NOT_INSTALLED
     install_progress: int = 0
@@ -62,3 +80,9 @@ class Pack:
     def abbr(self) -> str:
         source = self.name or self.key
         return source[:3].upper()
+
+    @property
+    def mods_directory(self) -> Path | None:
+        if self.directory is None:
+            return None
+        return self.directory / "mods"

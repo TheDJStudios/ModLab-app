@@ -1,9 +1,6 @@
 #!/bin/python3
 
-import pathlib
 from pathlib import Path
-import os
-import random
 import json
 from datetime import datetime
 import subprocess
@@ -69,19 +66,19 @@ def initialize_launcher():
     global packdata
     if not launcher_directory.exists():
         print("Launcher directory does not exist, Making directory")
-        launcher_directory.mkdir()
+        launcher_directory.mkdir(parents=True, exist_ok=True)
     if not packs_directory.exists():
         print("Packs directory does not exist, Making directory")
-        packs_directory.mkdir()
+        packs_directory.mkdir(parents=True, exist_ok=True)
     if not minecraft_directory.exists():
         print("Minecraft directory does not exist, Making directory")
-        minecraft_directory.mkdir()
+        minecraft_directory.mkdir(parents=True, exist_ok=True)
     if not packmapping_directory.exists():
         print("Packmapping directory does not exist, Making directory")
-        packmapping_directory.mkdir()
+        packmapping_directory.mkdir(parents=True, exist_ok=True)
     if not cache_directory.exists():
         print("Cache directory does not exist, Making directory")
-        cache_directory.mkdir()
+        cache_directory.mkdir(parents=True, exist_ok=True)
 
     if not packmapping_file.exists():
         print("Cannot find packmapping.json, Making file base")
@@ -149,7 +146,9 @@ def install_pack(packname):
     loader = pack.get("loader", "vanilla").lower()
     mcdirectory = (packs_directory / pack["dir"]).resolve()
     java_directory = mcdirectory / "java"
+    mods_directory = mcdirectory / "mods"
     mcdirectory.mkdir(parents=True, exist_ok=True)
+    mods_directory.mkdir(parents=True, exist_ok=True)
 
     if loader == "vanilla":
         minecraft_launcher_lib.install.install_minecraft_version(
@@ -219,8 +218,9 @@ def run_minecraft(packname):
     subprocess.run(command, cwd=mcdirectory)
 
 def clear_cache():
-    cache_directory.rmdir()
-    cache_directory.mkdir()
+    if cache_directory.exists():
+        shutil.rmtree(cache_directory)
+    cache_directory.mkdir(parents=True, exist_ok=True)
     print("Cache directory cleared")
 
 
@@ -229,14 +229,11 @@ def make_pack(packname, minecraft_version, loader="vanilla"):
     loader = loader.lower()
 
     if pack_key in packdata:
-        print(f"A pack named {packname} already exists")
-        return
+        raise ValueError(f"A pack named {packname} already exists")
 
     valid_loaders = ["vanilla", *minecraft_launcher_lib.mod_loader.list_mod_loader()]
     if loader not in valid_loaders:
-        print(f"Unknown loader: {loader}")
-        print(f"Valid loaders: {', '.join(valid_loaders)}")
-        return
+        raise ValueError(f"Unknown loader: {loader}. Valid loaders: {', '.join(valid_loaders)}")
 
     pack_folder = f"{packname}_{minecraft_version}"
     pack_path = packs_directory / pack_folder
@@ -247,6 +244,7 @@ def make_pack(packname, minecraft_version, loader="vanilla"):
         pack_path.mkdir()
     else:
         pack_path.mkdir()
+    (pack_path / "mods").mkdir(exist_ok=True)
 
     packdata[pack_key] = {
         "dir": pack_folder,

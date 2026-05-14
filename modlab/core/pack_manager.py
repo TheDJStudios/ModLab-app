@@ -3,7 +3,7 @@ from pathlib import Path
 
 from PySide6.QtCore import QObject, Signal
 
-from .pack import Loader, Pack, PackStatus, loader_from_text
+from .pack import ModFile, Pack, PackStatus, loader_from_text
 
 
 class PackManager(QObject):
@@ -15,7 +15,9 @@ class PackManager(QObject):
     def __init__(self, parent=None):
         super().__init__(parent)
         self._packs: list[Pack] = []
-        self.mapping_path = Path.home() / ".modlab" / "packmapping" / "packmapping.json"
+        self.launcher_directory = Path.home() / ".modlab"
+        self.packs_directory = self.launcher_directory / "packs"
+        self.mapping_path = self.launcher_directory / "packmapping" / "packmapping.json"
 
     @property
     def packs(self) -> list[Pack]:
@@ -44,18 +46,49 @@ class PackManager(QObject):
             obj = root.get(key) or {}
             if not isinstance(obj, dict):
                 continue
+            pack_dir_name = str(obj.get("dir") or "")
+            pack_directory = self.packs_directory / pack_dir_name if pack_dir_name else None
+            mods = self._scan_mods(pack_directory)
             self._packs.append(
                 Pack(
                     key=key,
                     name=str(obj.get("name") or key),
                     mc_version=str(obj.get("version") or ""),
                     loader=loader_from_text(str(obj.get("loader") or "vanilla")),
-                    mod_count=int(obj.get("mod_count") or 0),
+                    directory=pack_directory,
+                    mods=mods,
+                    mod_count=len(mods),
                     status=PackStatus.READY
                     if "launch_version" in obj
                     else PackStatus.NOT_INSTALLED,
                 )
             )
+        self.packs_changed.emit()
+
+    def _scan_mods(self, pack_directory: Path | None) -> list[ModFile]:
+        if pack_directory is None:
+            return []
+        mods_directory = pack_directory / "mods"
+        if not mods_directory.exists():
+            return []
+
+        mods: list[ModFile] = []
+        for path in sorted(mods_directory.glob("*.jar"), key=lambda item: item.name.lower()):
+            if not path.is_file():
+                continue
+            mods.append(ModFile(name=path.name, path=path, size_bytes=path.stat().st_size))
+        return mods
+
+    def add_placeholder(self, pack: Pack) -> None:
+        existing = self.find_pack(pack.key)
+        if existing is not None:
+            existing.name = pack.name
+            existing.mc_version = pack.mc_version
+            existing.loader = pack.loader
+            existing.status = pack.status
+            existing.install_progress = pack.install_progress
+        else:
+            self._packs.append(pack)
         self.packs_changed.emit()
 
     def save(self) -> None:

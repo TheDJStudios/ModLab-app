@@ -16,6 +16,8 @@ class PackGrid(QWidget):
         super().__init__(parent)
         self.cards: dict[str, PackCard] = {}
         self.selected = ""
+        self._packs: list[Pack] = []
+        self._filter = ""
 
         root = QVBoxLayout(self)
         root.setContentsMargins(0, 0, 0, 0)
@@ -33,7 +35,24 @@ class PackGrid(QWidget):
         root.addWidget(self.scroll)
 
     def set_packs(self, packs: list[Pack]) -> None:
-        self._rebuild(packs)
+        self._packs = list(packs)
+        self._rebuild(self._filtered_packs())
+
+    def set_filter(self, text: str) -> None:
+        self._filter = text.strip().lower()
+        self._rebuild(self._filtered_packs())
+
+    def _filtered_packs(self) -> list[Pack]:
+        if not self._filter:
+            return self._packs
+        return [
+            pack
+            for pack in self._packs
+            if self._filter in pack.name.lower()
+            or self._filter in pack.key.lower()
+            or self._filter in pack.mc_version.lower()
+            or self._filter in pack.loader.value.lower()
+        ]
 
     def _rebuild(self, packs: list[Pack]) -> None:
         for card in self.cards.values():

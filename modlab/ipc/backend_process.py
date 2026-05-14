@@ -16,6 +16,7 @@ class BackendProcess(QObject):
         self.script_path = script_path
         self.process: QProcess | None = None
         self.current_pack = ""
+        self._saw_protocol_error = False
 
     def is_busy(self) -> bool:
         return self.process is not None and self.process.state() != QProcess.NotRunning
@@ -43,8 +44,11 @@ class BackendProcess(QObject):
             self.process.kill()
             self.process.deleteLater()
 
+        self._saw_protocol_error = False
         self.process = QProcess(self)
         self.process.readyReadStandardOutput.connect(self._on_ready_read)
+        self.process.readyReadStandardError.connect(self._on_ready_read_error)
+        self.process.errorOccurred.connect(self._on_process_error)
         self.process.finished.connect(self._on_finished)
         self.process.start(self.python_path, [self.script_path, *args])
 
@@ -55,6 +59,17 @@ class BackendProcess(QObject):
             line = bytes(self.process.readLine()).decode("utf-8", errors="replace").strip()
             self.raw_output.emit(line)
             self._parse_line(line)
+
+    def _on_ready_read_error(self) -> None:
+        if self.process is None:
+            return
+        text = bytes(self.process.readAllStandardError()).decode("utf-8", errors="replace").strip()
+        if text:
+            self.raw_output.emit(text)
+
+    def _on_process_error(self, error: QProcess.ProcessError) -> None:
+        message = self.process.errorString() if self.process is not None else str(error)
+        self.operation_error.emit(self.current_pack, message)
 
     def _parse_line(self, line: str) -> None:
         parts = line.split(":")
@@ -73,10 +88,11 @@ class BackendProcess(QObject):
         elif tag == "DONE":
             self.operation_done.emit(pack)
         elif tag == "ERROR" and len(parts) >= 3:
+            self._saw_protocol_error = True
             self.operation_error.emit(pack, ":".join(parts[2:]))
 
     def _on_finished(self, exit_code: int, _exit_status: QProcess.ExitStatus) -> None:
-        if exit_code != 0 and self.current_pack:
+        if exit_code != 0 and self.current_pack and not self._saw_protocol_error:
             self.operation_error.emit(self.current_pack, f"Process exited with code {exit_code}")
         if self.process is not None:
             self.process.deleteLater()

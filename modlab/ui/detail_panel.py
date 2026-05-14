@@ -142,13 +142,14 @@ class DetailPanel(QWidget):
         self._clear_layout(self.mod_layout)
         self.mod_header.setText(f"// Mods ({pack.mod_count})")
 
-        if pack.mod_count == 0:
+        mods = pack.mods or []
+        if not mods:
             empty = QLabel("No mods installed.", self.mod_widget)
             empty.setObjectName("MutedText")
             empty.setStyleSheet("font-size: 10px; padding: 6px 0;")
             self.mod_layout.addWidget(empty)
         else:
-            for i in range(min(pack.mod_count, 5)):
+            for mod in mods[:8]:
                 row = QWidget(self.mod_widget)
                 row.setStyleSheet(
                     "background: qlineargradient(x1:0,y1:0,x2:1,y2:0,"
@@ -159,17 +160,17 @@ class DetailPanel(QWidget):
                 )
                 layout = QHBoxLayout(row)
                 layout.setContentsMargins(9, 5, 9, 5)
-                name = QLabel(f"Mod slot {i + 1}", row)
+                name = QLabel(mod.name, row)
                 name.setObjectName("DetailValue")
-                ver = QLabel("-", row)
+                ver = QLabel(mod.size_label, row)
                 ver.setObjectName("MutedText")
                 ver.setStyleSheet("font-size: 9px;")
                 layout.addWidget(name)
                 layout.addStretch()
                 layout.addWidget(ver)
                 self.mod_layout.addWidget(row)
-            if pack.mod_count > 5:
-                more = QLabel(f"+ {pack.mod_count - 5} more", self.mod_widget)
+            if len(mods) > 8:
+                more = QLabel(f"+ {len(mods) - 8} more", self.mod_widget)
                 more.setObjectName("MutedText")
                 more.setAlignment(Qt.AlignCenter)
                 more.setStyleSheet("font-size: 9px; padding: 4px 0;")
