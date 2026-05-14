@@ -1,3 +1,4 @@
 requests
 minecraft-launcher-lib
 pyinstaller
+PySide6

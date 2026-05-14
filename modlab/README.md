@@ -1,37 +1,36 @@
 # ModLab
 
-A Minecraft launcher and modpack manager
-Qt6 C++ frontend + Python (`minecraft-launcher-lib`) backend.
+A Minecraft launcher and modpack manager.
+
+Python (`PySide6`) frontend + Python (`minecraft-launcher-lib`) backend.
 
 ---
 
 ## Project Structure
 
 ```
-modlab/                         ← this repo (Qt frontend)
-├── CMakeLists.txt
-├── src/
-│   ├── main.cpp                ← entry point
-│   ├── core/
-│   │   ├── Pack.h              ← Pack struct, Loader/PackStatus enums
-│   │   ├── PackManager.h/.cpp  ← reads packmapping.json, owns pack list
-│   ├── ipc/
-│   │   ├── BackendProcess.h/.cpp ← QProcess wrapper for main.py calls
-│   └── ui/
-│       ├── AeroStyle.h         ← full QSS stylesheet (all tokens here)
-│       ├── MainWindow.h/.cpp   ← root window, wires everything together
-│       ├── Sidebar.h/.cpp      ← left nav panel
-│       ├── TopBar.h/.cpp       ← title + search + new pack button
-│       ├── PackGrid.h/.cpp     ← scrollable grid of PackCards
-│       ├── PackCard.h/.cpp     ← individual pack tile widget
-│       ├── DetailPanel.h/.cpp  ← right panel showing selected pack info
-│       └── NewPackDialog.h/.cpp ← modal dialog for creating a pack
-├── scripts/
-│   ├── build.sh                ← Linux/macOS build
-│   ├── build.bat               ← Windows build
-│   └── patch_backend.py        ← exact changes needed in main.py for IPC
+modlab/
+├── __main__.py                 <- `python3 -m modlab` entry point
+├── app.py                      <- QApplication setup, fonts, stylesheet
+├── core/
+│   ├── pack.py                 <- Pack dataclass, Loader/PackStatus enums
+│   └── pack_manager.py         <- reads packmapping.json, owns pack list
+├── ipc/
+│   └── backend_process.py      <- QProcess wrapper for main.py calls
+├── ui/
+│   ├── aero_style.py           <- full QSS stylesheet and color tokens
+│   ├── main_window.py          <- root window, wires everything together
+│   ├── sidebar.py              <- left nav panel
+│   ├── top_bar.py              <- title + search + new pack button
+│   ├── pack_grid.py            <- scrollable grid of PackCards
+│   ├── pack_card.py            <- individual pack tile widget
+│   ├── detail_panel.py         <- right panel showing selected pack info
+│   └── new_pack_dialog.py      <- modal dialog for creating a pack
+└── scripts/
+    ├── build.sh                <- Linux/macOS run helper
+    └── build.bat               <- Windows run helper
 
-main.py                         ← your existing Python backend (sibling dir)
+main.py                         <- existing Python backend, sibling of modlab/
 requirements.txt
 ```
 
@@ -39,80 +38,59 @@ requirements.txt
 
 ## Dependencies
 
-### C++ / Qt
-| Dep | Version | Install |
-|-----|---------|---------|
-| Qt6 Base | >= 6.4 | `apt install qt6-base-dev` / `brew install qt` / Qt Online Installer |
-| CMake | >= 3.20 | `apt install cmake` / `brew install cmake` |
-| GCC/Clang | C++17 | `apt install build-essential` / Xcode CLT |
-| MSVC | 2019+ | Visual Studio (Windows) |
-
-### Python (backend)
-```
+```bash
 pip install -r requirements.txt
-# requirements.txt: requests, minecraft-launcher-lib, pyinstaller
 ```
 
-### Fonts (optional but recommended)
-Download and place in `src/resources/fonts/`:
-- [Space Mono](https://fonts.google.com/specimen/Space+Mono) — Regular + Bold
-- [Exo 2](https://fonts.google.com/specimen/Exo+2) — Bold + Black (900)
+Required Python packages:
 
-If not bundled, Qt falls back to system fonts. The UI degrades gracefully.
+- `PySide6`
+- `requests`
+- `minecraft-launcher-lib`
+- `pyinstaller`
+
+Optional fonts can still be bundled or installed system-wide:
+
+- Space Mono Regular + Bold
+- Exo 2 Bold + Black
+
+If not present, Qt falls back to system fonts.
 
 ---
 
-## Build
+## Run
 
-### Step 1 — Patch the Python backend
-Apply the changes in `scripts/patch_backend.py` to your `main.py`.
-This adds `--action` CLI argument parsing and IPC-formatted stdout output.
-The original `gui_main()` path is preserved for direct testing.
-
-### Step 2 — Build
-
-**Linux / macOS**
 ```bash
-chmod +x scripts/build.sh
-./scripts/build.sh
+python3 -m modlab
 ```
 
-**Windows**
-```bat
-scripts\build.bat
+With explicit backend/runtime paths:
+
+```bash
+MODLAB_PYTHON=/path/to/venv/bin/python3 \
+MODLAB_SCRIPT=/path/to/main.py \
+python3 -m modlab
 ```
 
-**Manual (any platform)**
+The helper scripts simply run the Python frontend:
+
 ```bash
-mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release -DMODLAB_BACKEND_PATH=/abs/path/to/main.py
-cmake --build . --parallel
-```
-
-### Step 3 — Run
-```bash
-# Simple (uses python3 from PATH)
-./build/ModLab
-
-# With explicit python venv
-MODLAB_PYTHON=/path/to/venv/bin/python3 ./build/ModLab
-
-# Both paths overridable at runtime (no rebuild needed)
-MODLAB_PYTHON=/usr/bin/python3 MODLAB_SCRIPT=/home/user/modlab-py/main.py ./build/ModLab
+modlab/scripts/build.sh
+modlab\scripts\build.bat
 ```
 
 ---
 
 ## IPC Protocol
 
-The C++ frontend spawns `main.py` as a subprocess per operation.
-Python writes to stdout; C++ reads line-by-line via `QProcess`.
+The Python frontend spawns `main.py` as a subprocess per operation.
+The backend writes to stdout; the frontend reads line-by-line via `QProcess`.
 
 ```
-C++ -> python3 main.py --action run     --pack skyblock
-C++ -> python3 main.py --action install --pack skyblock
-C++ -> python3 main.py --action delete  --pack skyblock
-C++ -> python3 main.py --action make    --name Skyblock --version 1.21.4 --loader fabric
+frontend -> python3 main.py --action run     --pack skyblock
+frontend -> python3 main.py --action install --pack skyblock
+frontend -> python3 main.py --action delete  --pack skyblock
+frontend -> python3 main.py --action make    --name Skyblock --version 1.21.4 --loader fabric
 
 Python stdout ->
   STATUS:<packkey>:<message>
@@ -121,14 +99,8 @@ Python stdout ->
   ERROR:<packkey>:<message>
 ```
 
----
+The frontend mirrors the backend's mapping file:
 
-## Fonts note
-
-Qt's QSS `font-family` lookup is case-sensitive on Linux.
-If Space Mono or Exo 2 aren't rendering, check:
-```cpp
-QFontDatabase::families()  // list what Qt can see
+```text
+~/.modlab/packmapping/packmapping.json
 ```
-And ensure the `.ttf` files are either bundled in a Qt resource file (`.qrc`)
-or installed as system fonts.
