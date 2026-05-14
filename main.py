@@ -6,9 +6,15 @@ from datetime import datetime
 import subprocess
 import shutil
 import tkinter as tk
-import minecraft_launcher_lib
 import argparse
 
+# Custom imports
+import minecraft
+import packs
+
+
+# temp imports
+import minecraft_launcher_lib
 
 # directories
 
@@ -89,59 +95,10 @@ def initialize_launcher():
         packdata = json.loads(packmapping_file.read_text(encoding="utf-8"))
 
 
-def save_packdata():
-    packmapping_file.write_text(
-        json.dumps(packdata, indent=4),
-        encoding="utf-8"
-    )
-
-
-def get_pack(packname):
-    pack_key = packname.lower()
-    if pack_key not in packdata:
-        raise KeyError(f"No pack named {packname}")
-    return pack_key, packdata[pack_key]
-
-CURRENT_PACK_KEY = ""
-
-def set_status(status: str):
-    print(f"STATUS:{CURRENT_PACK_KEY}:{status}", flush=True)
-
-def set_progress(progress: int):
-    if current_max != 0:
-        percent = int((progress / current_max) * 100)
-        print(f"PROGRESS:{CURRENT_PACK_KEY}:{percent}", flush=True)
-
-def set_max(new_max: int):
-    global current_max
-    current_max = new_max
-
-
-callback = {
-    "setStatus": set_status,
-    "setProgress": set_progress,
-    "setMax": set_max
-}
-
-
-def install_java_runtime(version, mcdirectory, java_directory):
-    runtime_info = minecraft_launcher_lib.runtime.get_version_runtime_information(version, mcdirectory)
-    if runtime_info is None:
-        return None
-
-    runtime_name = runtime_info["name"]
-    java_directory.mkdir(parents=True, exist_ok=True)
-    minecraft_launcher_lib.runtime.install_jvm_runtime(
-        runtime_name,
-        java_directory,
-        callback=callback,
-    )
-    return minecraft_launcher_lib.runtime.get_executable_path(runtime_name, java_directory)
-
 
 def install_pack(packname):
     print("Installing Minecraft")
-    pack_key, pack = get_pack(packname)
+    pack_key, pack = packs.get_pack(packname, packdata)
     version = pack["version"]
     loader = pack.get("loader", "vanilla").lower()
     mcdirectory = (packs_directory / pack["dir"]).resolve()
@@ -150,30 +107,7 @@ def install_pack(packname):
     mcdirectory.mkdir(parents=True, exist_ok=True)
     mods_directory.mkdir(parents=True, exist_ok=True)
 
-    if loader == "vanilla":
-        minecraft_launcher_lib.install.install_minecraft_version(
-            version=version,
-            minecraft_directory=mcdirectory,
-            callback=callback,
-        )
-        launch_version = version
-        java_executable = install_java_runtime(launch_version, mcdirectory, java_directory)
-    else:
-        minecraft_launcher_lib.install.install_minecraft_version(
-            version=version,
-            minecraft_directory=mcdirectory,
-            callback=callback,
-        )
-        java_executable = install_java_runtime(version, mcdirectory, java_directory)
-        mod_loader = minecraft_launcher_lib.mod_loader.get_mod_loader(loader)
-        launch_version = mod_loader.install(
-            version,
-            mcdirectory,
-            callback=callback,
-            java=java_executable,
-        )
-        java_executable = install_java_runtime(launch_version, mcdirectory, java_directory) or java_executable
-
+    java_executable, launch_version = minecraft.install_minecraft(mcdirectory, version, loader, java_directory)
     root_runtime_directory = mcdirectory / "runtime"
     if root_runtime_directory.exists():
         shutil.rmtree(root_runtime_directory)
@@ -181,7 +115,7 @@ def install_pack(packname):
     pack["java_dir"] = str(java_directory)
     if java_executable is not None:
         pack["java_executable"] = java_executable
-    save_packdata()
+    packs.save_packdata(packmapping_file, packdata)
     print(f"Minecraft {launch_version} installed")
 
 
@@ -191,7 +125,7 @@ def install_minecraft(packname):
 
 def run_minecraft(packname):
     print("Running Minecraft")
-    packname, pack = get_pack(packname)
+    packname, pack = packs.get_pack(packname)
     mcdirectory = (packs_directory / pack["dir"]).resolve()
     java_directory = Path(pack.get("java_dir", mcdirectory / "java")).resolve()
     mcdirectory.mkdir(parents=True, exist_ok=True)
@@ -202,11 +136,11 @@ def run_minecraft(packname):
     if pack.get("java_executable") and Path(pack["java_executable"]).exists():
         options["executablePath"] = pack["java_executable"]
     else:
-        java_executable = install_java_runtime(pack.get("launch_version", pack["version"]), mcdirectory, java_directory)
+        java_executable = minecraft.install_java_runtime(pack.get("launch_version", pack["version"]), mcdirectory, java_directory)
         if java_executable is not None:
             pack["java_dir"] = str(java_directory)
             pack["java_executable"] = java_executable
-            save_packdata()
+            packs.save_packdata(packmapping_file, packdata)
             options["executablePath"] = java_executable
 
     command = minecraft_launcher_lib.command.get_minecraft_command(
@@ -253,7 +187,7 @@ def make_pack(packname, minecraft_version, loader="vanilla"):
         "name": packname,
         "loader": loader,
     }
-    save_packdata()
+    packs.save_packdata(packmapping_file, packdata)
     install_pack(pack_key)
 
 def list_packs():
@@ -274,7 +208,7 @@ def delete_pack(packname):
         print(f"No directory was found for {packname}'s listed directory: {remove_dir}")
 
     del packdata[pack_key]
-    save_packdata()
+    packs.save_packdata(packmapping_file, packdata)
     print(f"{packname} removed")
 
 
