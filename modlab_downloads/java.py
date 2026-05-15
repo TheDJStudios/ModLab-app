@@ -1,9 +1,10 @@
 import minecraft_launcher_lib
 from pathlib import Path
-import minecraft
+import data
 
+modlab_minecrat_status = data.Status()
 
-callback = minecraft.get_callback()
+callback = modlab_minecrat_status.get_callback()
 
 def download(version, packdir):
     javadir = packdir / "java"

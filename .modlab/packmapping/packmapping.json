@@ -1,0 +1,14 @@
+{
+    "test": {
+        "name": "test",
+        "version": "1.20.1",
+        "loader": "fabric",
+        "folder": ".modlab/packs/test"
+    },
+    "taketwo": {
+        "name": "taketwo",
+        "version": "1.20.1",
+        "loader": "fabric",
+        "folder": ".modlab/packs/taketwo"
+    }
+}
