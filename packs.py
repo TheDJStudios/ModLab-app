@@ -24,3 +24,27 @@ def get_directory(name):
     return directories[name]
 def get_file(name):
     return files[name]
+
+class Pack:
+    def __init__(self, name, packdata, version,loader = "vanilla"):
+        self.packdir = packs_directory / f"{name}"
+        self.packdata = packdata
+        self.name = name
+        self.version = version
+        self.loader = loader
+        if not self.packdir.exists():
+            self.packdir.mkdir()
+        else:
+            self.packdir = packs_directory / f"{self.name}"
+
+    def make_pack(self):
+        if not self.packdata[self.name].exists():
+            self.packdata[self.name] = {
+                "name": self.name,
+                ""
+            }
+
+
+
+
+

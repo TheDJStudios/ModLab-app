@@ -3,34 +3,43 @@ import minecraft_launcher_lib
 import json
 import modlab_downloads.java
 
-status = None
-progress = None
-max = None
+class Status:
+    def __init__(self):
+        self.installstatus = ""
+        self.progress = 0
+        self.max_progress = 0
 
-def set_status(new_status):
-    global status
-    status = new_status
-def set_progress(new_progress):
-    global progress
-    global max
-    progress = f"{new_progress}/{max}"
-def set_max(new_max):
-    global max
-    max = new_max
+    def set_status(self, new_status):
+        self.installstatus = new_status
 
+    def set_progress(self, new_progress):
+        self.progress = new_progress
+
+    def set_max(self, new_max):
+        self.max_progress = new_max
+
+    def get_callback(self):
+        return {
+            "setStatus": self.set_status,
+            "setProgress": self.set_progress,
+            "setMax": self.set_max,
+        }
+
+    def get_status(self):
+        return self.installstatus
+
+    def get_progress(self):
+        return self.progress
+
+    def get_max(self):
+        return self.max_progress
+
+
+status = Status()
 
 callback = {
-    "setStatus": set_status,
-    "setProgress": set_progress,
-    "setMax": set_max
+    "setStatus": status.set_status,
+    "setProgress": status.set_progress,
+    "setMax": status.set_max
 }
 
-
-def get_callback():
-    return callback
-def get_status():
-    return status
-def get_progress():
-    return progress
-def get_max():
-    return max
