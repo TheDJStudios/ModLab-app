@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 
 
 launcher_directory = Path(".modlab")
@@ -25,6 +26,11 @@ def get_directory(name):
     return directories[name]
 def get_file(name):
     return files[name]
+def get_filedata(name):
+    file = files[name]
+    file = Path(file)
+    print(json.loads(file.read_text()))
+    return json.loads(file.read_text("utf-8"))
 
 class Pack:
     def __init__(self, name, packdata, version,loader = "vanilla"):

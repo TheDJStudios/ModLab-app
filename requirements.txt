@@ -2,3 +2,5 @@ requests
 minecraft-launcher-lib>=8.0
 pyinstaller
 PySide6
+fastapi
+uvicorn
