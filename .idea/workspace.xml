@@ -12,13 +12,22 @@
   <component name="CMakeReloadState">
     <option name="reloaded" value="true" />
   </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="Velocity_App" targetName="Velocity_App" />
+    </generated>
+  </component>
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69fdf3c4-cbae-42d8-bbaf-93fffc19275a" name="Changes" comment="" />
+    <list default="true" id="69fdf3c4-cbae-42d8-bbaf-93fffc19275a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +35,16 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="8" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="Pv1MaImB" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -48,6 +67,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "CMake Application.Velocity_App.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -55,9 +76,16 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "rewrite/velocity",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "org.rust.first.attach.projects": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -81,10 +109,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1782280738933</updated>
+      <workItem from="1782280739981" duration="776000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticReloadCMake value="true" />
+    <isAutomaticBootstrapAfterUpdate value="false" />
   </component>
 </project>

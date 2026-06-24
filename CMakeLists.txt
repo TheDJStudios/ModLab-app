@@ -3,4 +3,6 @@ project(Velocity_App)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Velocity_App main.cpp)
+add_executable(Velocity_App main.cpp
+        windowing/VelocityX.cpp
+        windowing/VelocityX.h)
