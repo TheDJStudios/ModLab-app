@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 4.2)
-project(ModLab_app)
+project(Velocity_App)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
-add_executable(ModLab_app
-        main.cpp
-        main.cpp)
+add_executable(Velocity_App main.cpp)

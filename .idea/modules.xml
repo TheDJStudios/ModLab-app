@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ModLab.iml" filepath="$PROJECT_DIR$/.idea/ModLab.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/ModLab-app.iml" filepath="$PROJECT_DIR$/.idea/ModLab-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Velocity-App.iml" filepath="$PROJECT_DIR$/.idea/Velocity-App.iml" />
     </modules>
   </component>
 </project>

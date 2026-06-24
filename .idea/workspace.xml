@@ -1,90 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="ALL" />
+    <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="BackendCodeEditorMiscSettings">
-    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
-    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
-    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
-  </component>
-  <component name="CMakePresetLoader">{
-  &quot;useNewFormat&quot;: true
-}</component>
+  <component name="CMakePresetLoader"><![CDATA[{
+  "useNewFormat": true
+}]]></component>
   <component name="CMakeProjectFlavorService">
     <option name="flavorId" value="CMakePlainProjectFlavor" />
   </component>
   <component name="CMakeReloadState">
     <option name="reloaded" value="true" />
   </component>
-  <component name="CMakeRunConfigurationManager">
-    <generated />
-  </component>
   <component name="CMakeSettings">
-    <configurations />
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d30cb06-faca-4fec-84f4-27938fc645a2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/scripts/build.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/scripts/build.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/core/Pack.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/core/PackManager.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/core/PackManager.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ipc/BackendProcess.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ipc/BackendProcess.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/AeroStyle.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/DetailPanel.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/DetailPanel.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/MainWindow.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/MainWindow.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/NewPackDialog.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/NewPackDialog.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackCard.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackCard.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackGrid.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackGrid.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/Sidebar.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/Sidebar.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/TopBar.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/TopBar.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/__main__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/app.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/core/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/core/pack.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/core/pack_manager.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ipc/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ipc/backend_process.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/scripts/build.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/scripts/build.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/aero_style.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/detail_panel.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/main_window.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/new_pack_dialog.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/pack_card.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/pack_grid.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/sidebar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/top_bar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab_api/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab_api/get.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab_downloads/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab_downloads/cache.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sandbox.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_modlab_frontend.py" beforeDir="false" />
-    </list>
+    <list default="true" id="69fdf3c4-cbae-42d8-bbaf-93fffc19275a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,90 +27,9 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="40" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="eb72c34c3568294a948af046fc5b5b69661c34e5" />
-      </map>
-    </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
-  </component>
-  <component name="MacroExpansionManager">
-    <option name="directoryName" value="wWC9qIsK" />
-  </component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
-  </component>
-  <component name="NextEditCompletionFeaturesState">
-    <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.000000206128093" />
-      <entry key="S2" value="1.1122996158444867" />
-      <entry key="S5" value="2.6491997415841677" />
-      <entry key="S10" value="5.056333212495982" />
-      <entry key="S30" value="8.40055035231786" />
-      <entry key="S60" value="9.60236071970508" />
-      <entry key="M2" value="10.274814357377121" />
-      <entry key="M5" value="10.70333946683656" />
-      <entry key="M10" value="10.850549741054488" />
-      <entry key="M15" value="10.900115929224997" />
-      <entry key="M30" value="10.949932260142168" />
-      <entry key="H1" value="10.974934624565616" />
-      <entry key="H2" value="10.987459425960957" />
-      <entry key="H4" value="10.993727740155451" />
-      <entry key="D1" value="10.998954349250067" />
-      <entry key="W1" value="10.999850614607183" />
-    </decayedCancelled>
-    <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="0.0" />
-      <entry key="S30" value="0.0" />
-      <entry key="S60" value="0.0" />
-      <entry key="M2" value="0.0" />
-      <entry key="M5" value="0.0" />
-      <entry key="M10" value="0.0" />
-      <entry key="M15" value="0.0" />
-      <entry key="M30" value="0.0" />
-      <entry key="H1" value="0.0" />
-      <entry key="H2" value="0.0" />
-      <entry key="H4" value="0.0" />
-      <entry key="D1" value="0.0" />
-      <entry key="W1" value="0.0" />
-    </decayedSelected>
-    <decayedShown>
-      <entry key="MS100" value="0.9460576467255959" />
-      <entry key="MS500" value="0.9889711165645543" />
-      <entry key="S2" value="1.1045141287708413" />
-      <entry key="S5" value="2.5967871414442976" />
-      <entry key="S10" value="4.979221234355627" />
-      <entry key="S30" value="8.347290673811804" />
-      <entry key="S60" value="9.570386760667976" />
-      <entry key="M2" value="10.257294827178027" />
-      <entry key="M5" value="10.695935764280387" />
-      <entry key="M10" value="10.84677943525355" />
-      <entry key="M15" value="10.897586991790208" />
-      <entry key="M30" value="10.948660043791902" />
-      <entry key="H1" value="10.974296570527075" />
-      <entry key="H2" value="10.987139911352392" />
-      <entry key="H4" value="10.993567860813167" />
-      <entry key="D1" value="10.998927685731342" />
-      <entry key="W1" value="10.999846805117535" />
-    </decayedShown>
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -184,117 +37,54 @@
     <option name="minorVersion" value="1.2" />
     <option name="productBranch" value="Classic" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3,
-  &quot;fromUser&quot;: false
-}</component>
-  <component name="ProjectId" id="3DdfUHMDjvsvZgsT6femAYUrYSl" />
-  <component name="ProjectStatusUIService"><![CDATA[{
-  "uiKindId": "Widget"
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1,
+  "fromUser": false
 }]]></component>
+  <component name="ProjectId" id="3FZRjJd2tbEP791CXhJAydlIGAu" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.app.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.sandbox.executor": "Run",
     "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "RunOnceActivity.west.config.association.type.startup.service": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Shell Script.build.sh.executor": "Run",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "rewrite/velocity",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
+    "org.rust.first.attach.projects": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/modlab-cpp-client" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
-  </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="Velocity_App" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Velocity_App" TARGET_NAME="Velocity_App" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Velocity_App" RUN_TARGET_NAME="Velocity_App">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeBoostTestRunConfigurationType" factoryName="Boost Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="CMakeDoctestTestRunConfigurationType" factoryName="doctest Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2" />
-    </configuration>
-    <configuration name="Unnamed" type="CMakeRunConfiguration" factoryName="Application" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" EXPLICIT_BUILD_TARGET_NAME="all">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-python-sdk-024ed6589d45-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.23567.174" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2d30cb06-faca-4fec-84f4-27938fc645a2" name="Changes" comment="" />
-      <created>1778616881569</created>
+      <changelist id="69fdf3c4-cbae-42d8-bbaf-93fffc19275a" name="Changes" comment="" />
+      <created>1782280738933</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1778616881569</updated>
-      <workItem from="1778616882581" duration="642000" />
-      <workItem from="1778617825647" duration="1238000" />
-      <workItem from="1778621854780" duration="24351000" />
-      <workItem from="1778716238914" duration="5444000" />
-      <workItem from="1778724378600" duration="676000" />
+      <updated>1782280738933</updated>
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VCPKGProject">
-    <isAutomaticCheckingOnLaunch value="false" />
-    <isAutomaticFoundErrors value="true" />
-    <isAutomaticReloadCMake value="true" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ModLab_app$app.coverage" NAME="app Coverage Results" MODIFIED="1778716785211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modlab" />
-    <SUITE FILE_PATH="coverage/ModLab_app$main.coverage" NAME="main Coverage Results" MODIFIED="1778715682888" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ModLab_app$sandbox.coverage" NAME="sandbox Coverage Results" MODIFIED="1778634633825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
