@@ -8,9 +8,15 @@
     <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
     <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
   </component>
-  <component name="CMakePresetLoader"><![CDATA[{
-  "useNewFormat": true
-}]]></component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
   <component name="CMakeRunConfigurationManager">
     <generated />
   </component>
@@ -19,53 +25,65 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d30cb06-faca-4fec-84f4-27938fc645a2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/scripts/build.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/scripts/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/core/Pack.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/core/PackManager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/core/PackManager.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ipc/BackendProcess.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ipc/BackendProcess.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/main.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/AeroStyle.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/DetailPanel.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/DetailPanel.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/MainWindow.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/MainWindow.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/NewPackDialog.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/NewPackDialog.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackCard.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackCard.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackGrid.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackGrid.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/Sidebar.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/Sidebar.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/TopBar.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/TopBar.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/__main__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/core/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/core/pack.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/core/pack.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/core/pack_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/core/pack_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/ipc/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ipc/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/ipc/backend_process.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ipc/backend_process.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/scripts/build.bat" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/scripts/build.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/scripts/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/scripts/build.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/ui/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/ui/aero_style.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/aero_style.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/ui/detail_panel.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/detail_panel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/ui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/ui/new_pack_dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/new_pack_dialog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/ui/pack_card.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/pack_card.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/ui/pack_grid.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/pack_grid.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/ui/sidebar.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/sidebar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modlab/ui/top_bar.py" beforeDir="false" afterPath="$PROJECT_DIR$/modlab-pyshit-client/ui/top_bar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_modlab_frontend.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_modlab_frontend.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/scripts/build.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/scripts/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/core/Pack.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/core/PackManager.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/core/PackManager.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ipc/BackendProcess.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ipc/BackendProcess.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/AeroStyle.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/DetailPanel.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/DetailPanel.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/MainWindow.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/MainWindow.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/NewPackDialog.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/NewPackDialog.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackCard.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackCard.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackGrid.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/PackGrid.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/Sidebar.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/Sidebar.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/TopBar.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-cpp-client/modlab/src/ui/TopBar.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/__main__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/core/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/core/pack.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/core/pack_manager.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ipc/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ipc/backend_process.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/scripts/build.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/scripts/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/aero_style.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/detail_panel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/main_window.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/new_pack_dialog.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/pack_card.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/pack_grid.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/sidebar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab-pyshit-client/ui/top_bar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab_api/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab_api/get.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab_downloads/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modlab_downloads/cache.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sandbox.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_modlab_frontend.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +96,6 @@
   <component name="EmbeddingIndexingInfo">
     <option name="cachedIndexableFilesCount" value="40" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -102,39 +119,108 @@
     <commands />
     <urls />
   </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.000000206128093" />
+      <entry key="S2" value="1.1122996158444867" />
+      <entry key="S5" value="2.6491997415841677" />
+      <entry key="S10" value="5.056333212495982" />
+      <entry key="S30" value="8.40055035231786" />
+      <entry key="S60" value="9.60236071970508" />
+      <entry key="M2" value="10.274814357377121" />
+      <entry key="M5" value="10.70333946683656" />
+      <entry key="M10" value="10.850549741054488" />
+      <entry key="M15" value="10.900115929224997" />
+      <entry key="M30" value="10.949932260142168" />
+      <entry key="H1" value="10.974934624565616" />
+      <entry key="H2" value="10.987459425960957" />
+      <entry key="H4" value="10.993727740155451" />
+      <entry key="D1" value="10.998954349250067" />
+      <entry key="W1" value="10.999850614607183" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9460576467255959" />
+      <entry key="MS500" value="0.9889711165645543" />
+      <entry key="S2" value="1.1045141287708413" />
+      <entry key="S5" value="2.5967871414442976" />
+      <entry key="S10" value="4.979221234355627" />
+      <entry key="S30" value="8.347290673811804" />
+      <entry key="S60" value="9.570386760667976" />
+      <entry key="M2" value="10.257294827178027" />
+      <entry key="M5" value="10.695935764280387" />
+      <entry key="M10" value="10.84677943525355" />
+      <entry key="M15" value="10.897586991790208" />
+      <entry key="M30" value="10.948660043791902" />
+      <entry key="H1" value="10.974296570527075" />
+      <entry key="H2" value="10.987139911352392" />
+      <entry key="H4" value="10.993567860813167" />
+      <entry key="D1" value="10.998927685731342" />
+      <entry key="W1" value="10.999846805117535" />
+    </decayedShown>
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2026" />
+    <option name="minorVersion" value="1.2" />
+    <option name="productBranch" value="Classic" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3,
   &quot;fromUser&quot;: false
 }</component>
   <component name="ProjectId" id="3DdfUHMDjvsvZgsT6femAYUrYSl" />
+  <component name="ProjectStatusUIService"><![CDATA[{
+  "uiKindId": "Widget"
+}]]></component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.sandbox.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Shell Script.build.sh.executor&quot;: &quot;Run&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/ui&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.app.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.sandbox.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Shell Script.build.sh.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "rewrite/velocity",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/modlab-cpp-client" />
@@ -142,26 +228,28 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="build.sh" type="ShConfigurationType" temporary="true">
-      <option name="SCRIPT_TEXT" value="" />
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/modlab/scripts/build.sh" />
-      <option name="SCRIPT_OPTIONS" value="" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/modlab/scripts" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="/usr/bin/env" />
-      <option name="INTERPRETER_OPTIONS" value="bash" />
-      <option name="EXECUTE_IN_TERMINAL" value="true" />
-      <option name="EXECUTE_SCRIPT_FILE" value="true" />
-      <envs />
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeBoostTestRunConfigurationType" factoryName="Boost Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Shell Script.build.sh" />
-      </list>
-    </recent_temporary>
+    <configuration default="true" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="CMakeDoctestTestRunConfigurationType" factoryName="doctest Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="Unnamed" type="CMakeRunConfiguration" factoryName="Application" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
