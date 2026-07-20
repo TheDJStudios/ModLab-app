@@ -1,8 +1,18 @@
 cmake_minimum_required(VERSION 4.2)
+
 project(Velocity_App)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(Velocity_App main.cpp
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+
+qt_standard_project_setup()
+
+qt_add_executable(Velocity_App
+        main.cpp
         windowing/VelocityX.cpp
-        windowing/VelocityX.h)
+        windowing/VelocityX.h
+)
+
+target_link_libraries(Velocity_App PRIVATE Qt6::Widgets)

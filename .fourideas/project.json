@@ -1,0 +1,10 @@
+{
+  "runConfigurations": [
+    {
+      "name": "Current File",
+      "arguments": "",
+      "buildBeforeRun": false,
+      "useTerminal": false
+    }
+  ]
+}
