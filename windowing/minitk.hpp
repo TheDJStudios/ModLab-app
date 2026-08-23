@@ -46,7 +46,11 @@ namespace minitk {
 
 enum class Fill { none, x, y, both };
 enum class Side { top, bottom, left, right };
-enum class Align { start, center, end };
+enum class Align {
+    start, center, end,
+    top_start, top, top_end,
+    bottom_start, bottom, bottom_end
+};
 enum class Orientation { horizontal, vertical };
 
 struct PackOptions {
@@ -68,8 +72,17 @@ inline std::string s(const QString& value) { return value.toStdString(); }
 inline Qt::Orientation orientation(Orientation value) { return value == Orientation::horizontal ? Qt::Horizontal : Qt::Vertical; }
 inline Qt::Alignment alignment(Align align, Fill fill) {
     if (fill != Fill::none) return {};
-    if (align == Align::start) return Qt::AlignLeft;
-    if (align == Align::end) return Qt::AlignRight;
+    switch (align) {
+        case Align::start:        return Qt::AlignLeft | Qt::AlignVCenter;
+        case Align::end:          return Qt::AlignRight | Qt::AlignVCenter;
+        case Align::top_start:    return Qt::AlignLeft | Qt::AlignTop;
+        case Align::top:          return Qt::AlignHCenter | Qt::AlignTop;
+        case Align::top_end:      return Qt::AlignRight | Qt::AlignTop;
+        case Align::bottom_start: return Qt::AlignLeft | Qt::AlignBottom;
+        case Align::bottom:       return Qt::AlignHCenter | Qt::AlignBottom;
+        case Align::bottom_end:   return Qt::AlignRight | Qt::AlignBottom;
+        case Align::center:       return Qt::AlignCenter;
+    }
     return Qt::AlignCenter;
 }
 inline void sizePolicy(QWidget* widget, Fill fill) {
