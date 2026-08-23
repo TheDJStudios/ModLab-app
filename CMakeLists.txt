@@ -11,8 +11,6 @@ qt_standard_project_setup()
 
 qt_add_executable(Velocity_App
         main.cpp
-        windowing/VelocityX.cpp
-        windowing/VelocityX.h
 )
 
 target_link_libraries(Velocity_App PRIVATE Qt6::Widgets)
