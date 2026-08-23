@@ -10,7 +10,11 @@
 #include "extra/uuid.hpp"
 
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+int main(int argc, char *argv[]) {
+    auto root = minitk::Tk(argc, argv);
+    root.title("Velocity Desktop");
+    root.geometry(480, 270);
+
+    return root.mainloop();
 }
+
