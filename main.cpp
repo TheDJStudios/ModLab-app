@@ -31,6 +31,25 @@ void init() {
     logs::info("Done initializing. Have fun!");
 }
 
+std::vector<std::string> get_minecraft_versions() {
+    auto response = requests::get(
+        "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"
+    );
+
+    response.raise_for_status();
+
+    const auto manifest = response.json();
+    std::vector<std::string> versions;
+
+    for (const auto& version : manifest["versions"].as_array()) {
+        if (version["type"].as_string() == "release") {
+            versions.push_back(version["id"].as_string());
+        }
+    }
+
+    return versions;
+}
+
 int dlmr(std::string const &id, std::string const &dldir) {
     auto response = requests::get("https://jsonplaceholder.typicode.com/todos/1");
     std::cout << response.text;
@@ -83,6 +102,7 @@ void delete_pack(const std::string& name, const std::string& version, const std:
         logs::info("Pack Doesnt exist in overflow.");
     }
 }
+void pass() {};
 
 int main(int argc, char *argv[]) {
     init();
@@ -119,6 +139,82 @@ int main(int argc, char *argv[]) {
     minitk::Button rm_pack(mp_popup, "Remove Modpack", [] {
         logs::info("Removing Pack");
         delete_pack("static_tests", "1.20.1", "vanilla", false);
+    });
+
+    minitk::Label mkmpname(create_mp, "Name");
+    mkmpname.grid({
+        .row = 0,
+        .column = 0,
+        .padx = 4,
+        .pady = 4,
+        .align = minitk::Align::top_start
+    });
+
+    minitk::Entry mkmpnameentry(create_mp);
+    mkmpnameentry.grid({
+    .row = 0,
+    .column = 1,
+    .padx = 4,
+    .pady = 4,
+    .align = minitk::Align::top_start});
+
+    minitk::Label mkmploaderlabel(create_mp, "loader");
+    mkmploaderlabel.grid({
+    .row = 1,
+    .column = 0,
+    .padx = 4,
+    .pady = 4,
+    .align = minitk::Align::top_start});
+
+    minitk::Combobox mkmp_loader(create_mp, {
+        "vanilla",
+        "forge",
+        "fabric",
+        "neoforge",
+        "quilt"
+    });
+
+    mkmp_loader.grid({
+    .row = 1,
+    .column = 1,
+    .padx = 4,
+    .pady = 4,
+    .align = minitk::Align::top_start});
+
+    minitk::Label mkmp_version_label(create_mp, "version");
+    mkmp_version_label.grid({
+    .row = 2,
+    .column = 0,
+    .padx = 4,
+    .pady = 4,
+    .align = minitk::Align::top_start});
+
+    minitk::Combobox mkmp_version(create_mp, {get_minecraft_versions()});
+    mkmp_version.grid({
+    .row = 2,
+    .column = 1,
+    .padx = 4,
+    .pady = 4,
+    .align = minitk::Align::top_start});
+
+    minitk::Button mk_pack(create_mp, "Create Modpack", [&] {
+        std::string name;
+        std::string loader;
+        name = mkmpnameentry.get();
+        loader = mkmp_loader.get();
+
+
+        make_pack(name, mkmp_version.get(), loader);
+        create_mp.close();
+
+    });
+
+    mk_pack.grid({
+    .row = 3,
+    .column = 0,
+    .padx = 4,
+    .pady = 4,
+    .align = minitk::Align::center
     });
 
     mpack.grid({
