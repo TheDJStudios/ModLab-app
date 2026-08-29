@@ -100,31 +100,47 @@ int main(int argc, char *argv[]) {
         .align = minitk::Align::top_start
     });
 
-    minitk::Button mk_pack(content, "Make Modpack", [] {
-        logs::info("Creating Pack");
-        make_pack("static_tests", "1.20.1", "vanilla");
+    minitk::Window mp_popup(root, "Modpacks");
+    mp_popup.geometry(400, 250);
+
+    minitk::Window create_mp(root, "Create Modpack");
+    create_mp.geometry(400, 350);
+
+    minitk::Button mpack(content, "Modpacks", [&] {
+        logs::info("Opening modpack window");
+        mp_popup.show();
     });
 
-    minitk::Button rm_pack(content, "Remove Modpack", [] {
+    minitk::Button createmp(mp_popup, "Create Modpack", [&] {
+        logs::info("Opening MP Creation window");
+        create_mp.show();
+    });
+
+    minitk::Button rm_pack(mp_popup, "Remove Modpack", [] {
         logs::info("Removing Pack");
         delete_pack("static_tests", "1.20.1", "vanilla", false);
     });
 
-    mk_pack.grid({
-    .row = 0,
-    .column = 1,
-    .padx = 4,
-    .pady = 4,
-    .align = minitk::Align::top_start});
-
-    rm_pack.grid({
+    mpack.grid({
     .row = 0,
     .column = 2,
     .padx = 4,
     .pady = 4,
     .align = minitk::Align::top_start});
 
-    dlmr("", "");
+    rm_pack.grid({
+    .row = 0,
+    .column = 0,
+    .padx = 4,
+    .pady = 4,
+    .align = minitk::Align::top_start});
+
+    createmp.grid({
+    .row = 0,
+    .column = 1,
+    .padx = 4,
+    .pady = 4,
+    .align = minitk::Align::top_start});
 
     return root.mainloop();
 }
